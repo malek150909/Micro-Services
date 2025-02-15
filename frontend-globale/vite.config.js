@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react() , tailwindcss()],
   server: {
-    port: 9002 ,
+    port: 9000 ,
   },
   build: {
     outDir: 'dist', // Make sure it's 'dist' here

@@ -20,6 +20,7 @@ function Cours() {
   return (
     <div className="p-4">
       <h1 className="text-xl font-bold">Liste des Cours</h1>
+
       <button
         onClick={fetchCours}
         className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"

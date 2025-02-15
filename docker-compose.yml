@@ -41,6 +41,17 @@ services:
       - "traefik.http.routers.cours-frontend.rule=Host(`localhost`) && PathPrefix(`/cours-ui`)"
       - "traefik.http.services.cours-frontend.loadbalancer.server.port=80"
 
+  frontend-globale:
+    build:
+      context: ./frontend-globale
+    ports:
+      - "9000:80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend-globale.rule=Host(`localhost`) && PathPrefix(`/frontend-globale-ui`)"
+      - "traefik.http.services.frontend-globale.loadbalancer.server.port=80"
+
+
   traefik:
     image: traefik:v2.9
     command:

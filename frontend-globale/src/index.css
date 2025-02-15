@@ -24,7 +24,7 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
+  display: contents;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
@@ -47,7 +47,7 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #e07b00;
 }
 button:focus,
 button:focus-visible {
@@ -57,14 +57,15 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: #edf4ec;
   }
   a:hover {
     color: #747bff;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #32cd32;
   }
 }
+
 
 @import "tailwindcss";
