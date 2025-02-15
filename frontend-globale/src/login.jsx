@@ -1,19 +1,35 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-function LoginPage() {
-  const [matricule, setMatricule] = useState("");
-  const [password, setPassword] = useState("");
+function Login() {
+  const [matricule, setMatricule] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    console.log("Matricule:", matricule);
-    console.log("Mot de passe:", password);
-    // Ajouter ici la logique d'authentification
+  const handleLogin = async (e) => {
+    e.preventDefault(); // Empêche le rechargement de la page
+
+    try {
+      const response = await fetch('http://localhost:8083/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ matricule, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage('Connexion réussie !');
+      } else {
+        setMessage(data.message || 'Erreur lors de la connexion.');
+      }
+    } catch (error) {
+      setMessage('Erreur du serveur. Veuillez réessayer plus tard.',error);
+    }
   };
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-400">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-80 ">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-80">
         <h1 className="text-2xl font-bold text-center mb-6">LOGIN</h1>
         <form onSubmit={handleLogin}>
           <div className="mb-4">
@@ -44,14 +60,16 @@ function LoginPage() {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-black py-2 px-4 rounded hover:bg-blue-600"
+            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
           >
             Login
           </button>
         </form>
+
+        {message && <p className="mt-4 text-center text-red-500">{message}</p>}
       </div>
     </div>
   );
 }
 
-export default LoginPage;
+export default Login;
